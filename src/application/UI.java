@@ -49,6 +49,11 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\033[1;46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\033[1;107m";
 	
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+	
 	public static ChessPosition readChessPosition(Scanner sc) {
 		try {
 			

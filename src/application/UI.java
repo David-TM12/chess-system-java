@@ -1,6 +1,10 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -26,25 +30,38 @@ public class UI {
 //	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 	//LINUX
-		public static final String ANSI_RESET = "\033[0;0m";
-		public static final String ANSI_BLACK = "\033[1;30m";
-		public static final String ANSI_RED = "\033[1;31m";
-		public static final String ANSI_GREEN = "\033[1;32m";
-		public static final String ANSI_YELLOW = "\033[1;33m";
-		public static final String ANSI_BLUE = "\033[1;34m";
-		public static final String ANSI_PURPLE = "\033[1;35m";
-		public static final String ANSI_CYAN = "\033[1;36m";
-		public static final String ANSI_WHITE = "\033[1;97m";
+	public static final String ANSI_RESET = "\033[0;0m";
+	public static final String ANSI_BLACK = "\033[1;30m";
+	public static final String ANSI_RED = "\033[1;31m";
+	public static final String ANSI_GREEN = "\033[1;32m";
+	public static final String ANSI_YELLOW = "\033[1;33m";
+	public static final String ANSI_BLUE = "\033[1;34m";
+	public static final String ANSI_PURPLE = "\033[1;35m";
+	public static final String ANSI_CYAN = "\033[1;36m";
+	public static final String ANSI_WHITE = "\033[1;97m";
 
-		public static final String ANSI_BLACK_BACKGROUND = "\033[1;40m";
-		public static final String ANSI_RED_BACKGROUND = "\033[1;41m";
-		public static final String ANSI_GREEN_BACKGROUND = "\033[1;42m";
-		public static final String ANSI_YELLOW_BACKGROUND = "\033[1;43m";
-		public static final String ANSI_BLUE_BACKGROUND = "\033[1;44m";
-		public static final String ANSI_PURPLE_BACKGROUND = "\033[1;45m";
-		public static final String ANSI_CYAN_BACKGROUND = "\033[1;46m";
-		public static final String ANSI_WHITE_BACKGROUND = "\033[1;107m";
-		
+	public static final String ANSI_BLACK_BACKGROUND = "\033[1;40m";
+	public static final String ANSI_RED_BACKGROUND = "\033[1;41m";
+	public static final String ANSI_GREEN_BACKGROUND = "\033[1;42m";
+	public static final String ANSI_YELLOW_BACKGROUND = "\033[1;43m";
+	public static final String ANSI_BLUE_BACKGROUND = "\033[1;44m";
+	public static final String ANSI_PURPLE_BACKGROUND = "\033[1;45m";
+	public static final String ANSI_CYAN_BACKGROUND = "\033[1;46m";
+	public static final String ANSI_WHITE_BACKGROUND = "\033[1;107m";
+	
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+			
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition(column, row);
+			
+		}catch(RuntimeException e) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
+		}
+	}
+	
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
